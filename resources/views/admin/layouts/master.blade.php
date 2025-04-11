@@ -20,7 +20,7 @@
   <style>
     main {
       min-height: 75vh;
-      padding-top: 150px; /* Tambah jarak dari header */
+      padding-top: 60px; /* Tambah jarak dari header */
       padding-bottom: 30px;
     }
   </style>
