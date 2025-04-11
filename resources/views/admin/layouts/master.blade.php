@@ -17,28 +17,53 @@
   <link href="{{ asset('NiceAdmin/assets/css/style.css') }}" rel="stylesheet">
 
   @stack('styles')
+  <style>
+    main {
+      min-height: 75vh;
+      padding-top: 150px; /* Tambah jarak dari header */
+      padding-bottom: 30px;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="py-3 bg-primary text-white text-center shadow">
-    <h1 class="mb-0">Toko Cino</h1>
-  </header>
+<!-- Header -->
+<header class="py-3 bg-primary text-white shadow-sm">
+  <div class="container d-flex align-items-center justify-content-between">
+    <!-- Kiri: Logo dan Judul -->
+    <div class="d-flex align-items-center">
+      <!-- <img src="path/to/logo.png" alt="Logo Toko Cino" style="height: 40px; margin-right: 15px;"> -->
 
-  <!-- Main Content -->
-  <main class="container mt-4">
-    @yield('content')
-  </main>
+      <div class="text-start">
+        <h1 class="fw-bold mb-1" style="font-size: 1.75rem;">Toko Cino</h1>
+        <p class="mb-0" style="font-size: 0.95rem;">Solusi Laptop & Komputer Anda</p>
+      </div>
+    </div>
 
-  <!-- Footer -->
-  <footer class="text-center py-3 mt-5 border-top">
-    <small>&copy; {{ date('Y') }} Admin Panel. All rights reserved.</small>
-  </footer>
+    <!-- Kanan: Profile -->
+    <div class="d-flex align-items-center">
+      <span class="me-2" style="font-size: 0.95rem;">Halo, {{ Auth::user()->name ?? 'Admin' }}</span>
+      <a href="#" class="text-white text-decoration-none">
+        <i class="bi bi-person-circle" style="font-size: 1.8rem;"></i>
+      </a>
+    </div>
+  </div>
+</header>
 
-  <!-- Scripts -->
-  <script src="{{ asset('NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ asset('NiceAdmin/assets/js/main.js') }}"></script>
+<!-- Main Content -->
+<main class="container">
+  @yield('content')
+</main>
 
-  @stack('scripts')
+<!-- Footer -->
+<footer class="text-center py-3 mt-5 border-top">
+  <small>&copy; {{ date('Y') }} Admin Panel. All rights reserved.</small>
+</footer>
+
+<!-- Scripts -->
+<script src="{{ asset('NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('NiceAdmin/assets/js/main.js') }}"></script>
+
+@stack('scripts')
 </body>
 </html>
