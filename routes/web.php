@@ -51,4 +51,18 @@ Route::prefix('admin')->group(function () {
 
     
     Route::get('admin/pembayaran/create', [PembayaranController::class, 'create'])->name('pembayaran.create');
+
+
+Route::get('/admin/riwayat', function () {
+    return view('admin.riwayat.index');
+})->name('riwayat.index');
+
+Route::get('/admin/riwayat/pemesanan', function () {
+    return view('admin.riwayat.pemesanan');
+})->name('riwayat.pemesanan');
+
+Route::get('/admin/riwayat/transaksi', function () {
+    return view('admin.riwayat.transaksi');
+})->name('riwayat.transaksi');
+
 });

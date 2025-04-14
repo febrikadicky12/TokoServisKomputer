@@ -10,7 +10,7 @@
   <div class="card-body row">
     <div class="col-md-4 text-center">
       @if($produk->gambar)
-        <img src="{{ asset('storage/' . $produk->gambar) }}" class="img-fluid rounded mb-3" alt="{{ $produk->merek }}">
+        <img src="{{ asset($produk->gambar) }}" class="img-fluid rounded mb-3" alt="{{ $produk->merek }}">
       @else
         <img src="https://via.placeholder.com/300x200?text=No+Image" class="img-fluid rounded mb-3" alt="No Image">
       @endif

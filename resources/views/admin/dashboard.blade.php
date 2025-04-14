@@ -62,7 +62,7 @@
         <i class="bi bi-clock-history display-3 text-danger"></i>
         <h4 class="mt-3 fw-bold">Riwayat</h4>
         <p class="text-muted mb-4">Lihat semua riwayat transaksi</p>
-        <a href="{{ route('produk.index') }}" class="btn btn-lg btn-danger rounded-pill px-4">Riwayat</a>
+        <a href="{{ route('riwayat.index') }}" class="btn btn-lg btn-danger rounded-pill px-4">Riwayat</a>
       </div>
     </div>
   </div>

@@ -38,7 +38,7 @@
           <tr>
             <td>{{ $i + 1 }}</td>
             <td>
-              <img src="{{ asset('storage/' . $produk->gambar) }}" alt="Gambar Produk" width="60" height="60" style="object-fit: cover;">
+              <img src="{{ asset($produk->gambar) }}" alt="Gambar Produk" width="60" height="60" style="object-fit: cover;">
             </td>
             <td>{{ $produk->merek }} {{ $produk->jenis }}</td>
             <td>{{ $produk->kode_produk }}</td>
