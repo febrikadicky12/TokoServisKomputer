@@ -23,17 +23,30 @@ class ProdukController extends Controller
     // Menyimpan produk baru
     public function store(Request $request)
     {
-        $request->validate([
-            'kode' => 'required|unique:produks',
-            'nama' => 'required',
+        $validated = $request->validate([
+            'kode_produk' => 'required|unique:produk,kode_produk',
             'kategori' => 'required',
+            'merek' => 'required',
+            'jenis' => 'required',
+            'spesifikasi' => 'required',
+            'warna' => 'required',
             'harga' => 'required|numeric',
-            'status' => 'required'
+            'stok' => 'required|numeric',
+            'kondisi' => 'required',
+            'status' => 'required',
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        Produk::create($request->all());
+        if ($request->hasFile('gambar')) {
+            $gambar = $request->file('gambar');
+            $namaGambar = time() . '_' . $gambar->getClientOriginalName();
+            $gambar->storeAs('public/produk', $namaGambar);
+            $validated['gambar'] = 'produk/' . $namaGambar;
+        }
 
-        return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan.');
+        Produk::create($validated);
+
+        return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan');
     }
 
     // Menampilkan form edit produk
@@ -43,24 +56,50 @@ class ProdukController extends Controller
         return view('admin.produk.edit', compact('produk'));
     }
 
-    // Update produk
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'kode' => 'required',
-            'nama' => 'required',
-            'kategori' => 'required',
-            'harga' => 'required|numeric',
-            'status' => 'required'
-        ]);
+    // Memperbarui data produk
+// Memperbarui data produk
+public function update(Request $request, $id)
+{
+    $produk = Produk::findOrFail($id);
 
-        $produk = Produk::findOrFail($id);
-        $produk->update($request->all());
+    $validated = $request->validate([
+        'kode_produk' => 'required|unique:produk,kode_produk,' . $id,
+        'kategori' => 'required',
+        'merek' => 'required',
+        'jenis' => 'required',
+        'spesifikasi' => 'required',
+        'warna' => 'required',
+        'harga' => 'required|numeric',
+        'stok' => 'required|numeric',
+        'kondisi' => 'required',
+        'status' => 'required',
+        'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
 
-        return redirect()->route('produk.index')->with('success', 'Produk berhasil diperbarui.');
+    // Cek jika ada gambar baru diupload
+    if ($request->hasFile('gambar')) {
+        $gambar = $request->file('gambar');
+        $namaGambar = time() . '_' . $gambar->getClientOriginalName();
+        $gambar->storeAs('public/produk', $namaGambar);
+        $validated['gambar'] = 'produk/' . $namaGambar;
+    } else {
+        // jika tidak upload gambar baru, gunakan gambar lama
+        $validated['gambar'] = $produk->gambar;
     }
 
-    // Hapus produk
+    $produk->update($validated);
+
+    return redirect()->route('produk.index')->with('success', 'Produk berhasil diperbarui.');
+}
+
+    // Menampilkan detail produk
+    public function show($id)
+    {
+        $produk = Produk::findOrFail($id);
+        return view('admin.produk.show', compact('produk'));
+    }
+
+    // Menghapus produk
     public function destroy($id)
     {
         $produk = Produk::findOrFail($id);

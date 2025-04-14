@@ -5,6 +5,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ServisController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\PembayaranController;
 
 Route::get('/', function () {
     return view('admin.dashboard');
@@ -35,11 +37,18 @@ Route::prefix('admin')->group(function () {
     Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
     Route::get('/produk/create', [ProdukController::class, 'create'])->name('produk.create');
     Route::post('/produk', [ProdukController::class, 'store'])->name('produk.store');
+    Route::get('/produk/{id}', [ProdukController::class, 'show'])->name('produk.show');
     Route::get('/produk/{id}/edit', [ProdukController::class, 'edit'])->name('produk.edit');
     Route::put('/produk/{id}', [ProdukController::class, 'update'])->name('produk.update');
     Route::delete('/produk/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
-});
 
-// ====== PENJUALAN (etalase) ======
-Route::get('/etalase', [PenjualanController::class, 'index'])->name('penjualan.index');
-Route::get('/etalase/{id}', [PenjualanController::class, 'show'])->name('penjualan.show');
+    // ====== Keranjang ======
+    Route::get('admin/keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
+    Route::post('admin/keranjang/tambah', [KeranjangController::class, 'tambah'])->name('keranjang.tambah');
+    Route::delete('admin/keranjang/{id}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
+    Route::put('admin/keranjang/{id}/update', [KeranjangController::class, 'update'])->name('keranjang.update');
+    Route::resource('admin/keranjang', KeranjangController::class)->except(['update']);
+
+    
+    Route::get('admin/pembayaran/create', [PembayaranController::class, 'create'])->name('pembayaran.create');
+});
