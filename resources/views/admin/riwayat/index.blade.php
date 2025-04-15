@@ -32,14 +32,14 @@
           <tr>
             <td>ORD-00123</td>
             <td>12 Apr 2025</td>
-            <td>3 Item<br>Lipstik<br>Bedak</td>
+            <td>3 Item<br>Laptop</td>
             <td><span class="badge bg-primary">Dikirim</span></td>
             <td><a href="#">Detail</a></td>
           </tr>
           <tr>
             <td>ORD-00124</td>
             <td>11 Apr 2025</td>
-            <td>1 Item<br>Serum</td>
+            <td>1 Item<br>Komputer</td>
             <td><span class="badge bg-danger">Dibatalkan</span></td>
             <td><a href="#">Detail</a></td>
           </tr>
