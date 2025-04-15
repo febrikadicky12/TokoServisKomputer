@@ -13,6 +13,7 @@ class Produk extends Model
 
     protected $fillable = [
         'kode_produk',
+<<<<<<< HEAD
         'nama_produk',
         'harga',
     ];
@@ -25,4 +26,23 @@ class Produk extends Model
         return $this->belongsToMany(NotaPembayaran::class, 'nota_produk', 'produk_id', 'nota_pembayaran_id')
                     ->withPivot('kuantitas', 'total_harga');
     }
+=======
+        'kategori',
+        'merek',
+        'jenis',
+        'spesifikasi',
+        'warna',
+        'harga',
+        'stok',
+        'kondisi',
+        'status',
+        'gambar'
+    ];
+    // Produk.php
+public function kode()
+{
+    return $this->belongsTo(Kode::class); // jika produk memiliki kode
+}
+
+>>>>>>> 088d45d99d6e3e898e5d3aa8770d99e333999b9b
 }
