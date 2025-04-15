@@ -14,7 +14,6 @@ Route::get('/', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');
 
-
 // ====== ADMIN GROUP ======
 Route::prefix('admin')->group(function () {
 
@@ -42,26 +41,28 @@ Route::prefix('admin')->group(function () {
     Route::put('/keranjang/{id}/update', [KeranjangController::class, 'update'])->name('keranjang.update');
     Route::delete('/keranjang/{id}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
 
-    
-    
-        // ====== PEMBAYARAN ======
-        Route::prefix('pembayaran')->name('pembayaran.')->group(function () {
-            Route::get('/', [PembayaranController::class, 'create'])->name('create');
-            Route::post('/', [PembayaranController::class, 'store'])->name('store');
-        });
-    
-    
-
-
-
-// ====== NOTA PEMBAYARAN (PUBLIC) ======
-Route::post('/pembayaran', [NotaPembayaranController::class, 'store'])->name('pembayaran.store'); // Untuk menyimpan data
-Route::get('/nota-pembayaran-preview', [NotaPembayaranController::class, 'preview'])->name('nota.preview'); // Untuk preview nota
-Route::get('/nota-pembayaran/{kode_notapembayaran}', [NotaPembayaranController::class, 'show'])->name('nota.show'); // Untuk menampilkan nota pembayaran berdasarkan kode
-Route::get('/nota-pembayaran/cetak/{kode_notapembayaran}', [NotaPembayaranController::class, 'cetak'])->name('nota.cetak'); // Untuk mencetak nota
-// ====== NOTA PEMBAYARAN (PUBLIC) ======
-Route::get('/nota-pembayaran/{kode_notapembayaran}', [NotaPembayaranController::class, 'show'])->name('nota.show');
-
-
+    // ====== PEMBAYARAN ======
+    Route::prefix('pembayaran')->name('pembayaran.')->group(function () {
+        Route::get('/', [PembayaranController::class, 'create'])->name('create');
+        Route::post('/', [PembayaranController::class, 'store'])->name('store');
     });
 
+    // ====== RIWAYAT ======
+    Route::get('/riwayat', function () {
+        return view('admin.riwayat.index');
+    })->name('riwayat.index');
+
+    Route::get('/riwayat/pemesanan', function () {
+        return view('admin.riwayat.pemesanan');
+    })->name('riwayat.pemesanan');
+
+    Route::get('/riwayat/transaksi', function () {
+        return view('admin.riwayat.transaksi');
+    })->name('riwayat.transaksi');
+});
+
+// ====== NOTA PEMBAYARAN (PUBLIC) ======
+Route::post('/pembayaran', [NotaPembayaranController::class, 'store'])->name('pembayaran.store');
+Route::get('/nota-pembayaran-preview', [NotaPembayaranController::class, 'preview'])->name('nota.preview');
+Route::get('/nota-pembayaran/{kode_notapembayaran}', [NotaPembayaranController::class, 'show'])->name('nota.show');
+Route::get('/nota-pembayaran/cetak/{kode_notapembayaran}', [NotaPembayaranController::class, 'cetak'])->name('nota.cetak');

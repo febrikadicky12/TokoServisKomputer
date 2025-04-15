@@ -21,12 +21,20 @@
           <div class="mb-3">
             <label class="form-label">Kategori</label>
             <select name="kategori" class="form-control" required>
+<<<<<<< HEAD
                 <option value="Laptop" {{ $produk->kategori == 'Laptop' ? 'selected' : '' }}>Laptop</option>
                 <option value="Komputer" {{ $produk->kategori == 'Komputer' ? 'selected' : '' }}>Komputer</option>
                 <option value="Komponen" {{ $produk->kategori == 'Komponen' ? 'selected' : '' }}>Komponen</option>
             </select>
             </div>
 
+=======
+              <option value="Laptop" {{ $produk->kategori == 'Laptop' ? 'selected' : '' }}>Laptop</option>
+              <option value="Komputer" {{ $produk->kategori == 'Komputer' ? 'selected' : '' }}>Komputer</option>
+              <option value="Komponen" {{ $produk->kategori == 'Komponen' ? 'selected' : '' }}>Komponen</option>
+            </select>
+          </div>
+>>>>>>> 088d45d99d6e3e898e5d3aa8770d99e333999b9b
 
           <div class="mb-3">
             <label class="form-label">Merek</label>
@@ -82,7 +90,11 @@
             <label class="form-label">Gambar</label>
             <input type="file" name="gambar" class="form-control" accept="image/*">
             @if($produk->gambar)
+<<<<<<< HEAD
               <img src="{{ asset('storage/' . $produk->gambar) }}" class="mt-2" height="100" alt="Preview">
+=======
+              <img src="{{ asset($produk->gambar) }}" class="mt-2 rounded border" height="100" alt="Preview Gambar">
+>>>>>>> 088d45d99d6e3e898e5d3aa8770d99e333999b9b
             @endif
           </div>
         </div>
