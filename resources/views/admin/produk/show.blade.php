@@ -10,11 +10,7 @@
   <div class="card-body row">
     <div class="col-md-4 text-center">
       @if($produk->gambar)
-<<<<<<< HEAD
-        <img src="{{ asset('storage/' . $produk->gambar) }}" class="img-fluid rounded mb-3" alt="{{ $produk->merek }}">
-=======
         <img src="{{ asset($produk->gambar) }}" class="img-fluid rounded mb-3" alt="{{ $produk->merek }}">
->>>>>>> 088d45d99d6e3e898e5d3aa8770d99e333999b9b
       @else
         <img src="https://via.placeholder.com/300x200?text=No+Image" class="img-fluid rounded mb-3" alt="No Image">
       @endif
@@ -66,7 +62,7 @@
           </td>
         </tr>
       </table>
-      <a href="{{ route('produk.index') }}" class="btn btn-secondary mt-3">Kembali</a>
+      <a href="{{ route('admin.produk.index') }}" class="btn btn-secondary mt-3">Kembali</a>
     </div>
   </div>
 </div>

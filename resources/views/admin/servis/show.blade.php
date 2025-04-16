@@ -6,7 +6,7 @@
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0">Detail Servis</h2>
-        <a href="{{ route('servis.index') }}" class="btn btn-secondary">← Kembali</a>
+        <a href="{{ route('admin.servis.index') }}" class="btn btn-secondary">← Kembali</a>
     </div>
 
     <div class="card shadow-sm">
@@ -41,9 +41,9 @@
     </div>
 
     <div class="mt-4 d-flex gap-2">
-        <a href="{{ route('servis.edit', $servis->id) }}" class="btn btn-primary">✏️ Edit</a>
+        <a href="{{ route('admin.servis.edit', $servis->id) }}" class="btn btn-primary">✏️ Edit</a>
 
-        <form action="{{ route('servis.destroy', $servis->id) }}" method="POST"
+        <form action="{{ route('admin.servis.destroy', $servis->id) }}" method="POST"
               onsubmit="return confirm('Yakin ingin menghapus data ini?')">
             @csrf
             @method('DELETE')

@@ -5,7 +5,7 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
   <h4>Keranjang Belanja</h4>
-  <a href="{{ route('produk.index') }}" class="btn btn-secondary">+ Tambah Produk</a>
+  <a href="{{ route('admin.produk.index') }}" class="btn btn-secondary">+ Tambah Produk</a>
 </div>
 
 @if(session('success'))
@@ -42,13 +42,13 @@
             <tr>
               <td>{{ $i + 1 }}</td>
               <td>
-                <img src="{{ asset('storage/' . $produk->gambar) }}" alt="Gambar Produk" width="60" height="60" style="object-fit: cover;">
+                <img src="{{ asset($produk->gambar) }}" alt="Gambar Produk" width="60" height="60" style="object-fit: cover;">
               </td>
               <td>{{ $produk->merek }} {{ $produk->jenis }}</td>
               <td>{{ $produk->kode_produk }}</td>
               <td>Rp {{ number_format($produk->harga, 0, ',', '.') }}</td>
               <td>
-                <form action="{{ route('keranjang.update', $item->id) }}" method="POST" style="display: inline-block;">
+                <form action="{{ route('admin.keranjang.update', $item->id) }}" method="POST" style="display: inline-block;">
                   @csrf
                   @method('PUT')
                   <input type="number" name="jumlah" value="{{ $item->jumlah }}" min="1" class="form-control form-control-sm" style="width: 60px;">
@@ -57,7 +57,7 @@
               </td>
               <td>Rp {{ number_format($subtotal, 0, ',', '.') }}</td>
               <td>
-                <form action="{{ route('keranjang.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Hapus item ini dari keranjang?')">
+                <form action="{{ route('admin.keranjang.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Hapus item ini dari keranjang?')">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-sm btn-danger">Hapus</button>
@@ -81,16 +81,16 @@
   </div>
 
   <div class="text-start">
-    <a href="{{ route('produk.index') }}" class="btn btn-secondary">Kembali</a>
+    <a href="{{ route('admin.produk.index') }}" class="btn btn-secondary">Kembali</a>
   </div>
 
   <div class="mt-3 text-end">
-    <a href="{{ route('pembayaran.create') }}" class="btn btn-success">Lanjut ke Pembayaran</a>
+    <a href="{{ route('admin.pembayaran.create') }}" class="btn btn-success">Lanjut ke Pembayaran</a>
   </div>
 @else
   <div class="text-center">
     <p>Keranjang masih kosong. Silakan tambahkan produk.</p>
-    <a href="{{ route('produk.index') }}" class="btn btn-primary">Tambah Produk</a>
+    <a href="{{ route('admin.produk.index') }}" class="btn btn-primary">Tambah Produk</a>
   </div>
 @endif
 @endsection

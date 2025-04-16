@@ -41,6 +41,7 @@ class PembayaranController extends Controller
         $request->validate([
             'total' => 'required|numeric',
             'kode_pelanggan' => 'required|string',
+            'kode_pelanggan' => 'KODE001', 
         ]);
 
         $kodePelanggan = $request->kode_pelanggan;

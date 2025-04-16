@@ -16,50 +16,60 @@ class KeranjangController extends Controller
             'jumlah' => 'required|integer|min:1',
         ]);
 
-        // Cek apakah produk sudah ada di keranjang
-        $item = Keranjang::where('produk_kode', $request->produk_kode)->first();
+        // Gantilah kode pelanggan sesuai logika aplikasimu
+        // Jika sudah ada login pelanggan, bisa pakai: auth()->user()->kode_pelanggan
+        $kodePelanggan = 'KODE001'; // Contoh hardcoded
+
+        // Cek apakah produk sudah ada di keranjang untuk pelanggan ini
+        $item = Keranjang::where('produk_kode', $request->produk_kode)
+                         ->where('kode_pelanggan', $kodePelanggan)
+                         ->first();
 
         if ($item) {
             // Jika produk sudah ada, tambah jumlahnya
             $item->jumlah += $request->jumlah;
             $item->save();
         } else {
-            // Jika produk belum ada, buat item baru di keranjang
+            // Jika belum, buat item baru
             Keranjang::create([
-                'produk_kode' => $request->produk_kode,
-                'jumlah' => $request->jumlah,
+                'produk_kode'    => $request->produk_kode,
+                'jumlah'         => $request->jumlah,
+                'kode_pelanggan' => $kodePelanggan,
             ]);
         }
 
-        return redirect()->route('keranjang.index')->with('success', 'Produk ditambahkan ke keranjang.');
+        return redirect()->route('admin.keranjang.index')->with('success', 'Produk ditambahkan ke keranjang.');
     }
 
     public function index()
     {
-        // Mengambil data keranjang beserta informasi produk terkait
-        $keranjang = Keranjang::with('produk')->get();
+        // Gantilah dengan kode pelanggan dinamis jika perlu
+        $kodePelanggan = 'KODE001';
+
+        // Ambil keranjang milik pelanggan
+        $keranjang = Keranjang::with('produk')
+                              ->where('kode_pelanggan', $kodePelanggan)
+                              ->get();
+
         return view('admin.keranjang.index', compact('keranjang'));
     }
 
     public function destroy($id)
     {
-        // Hapus item keranjang berdasarkan ID
         Keranjang::destroy($id);
         return back()->with('success', 'Item keranjang dihapus.');
     }
 
     public function update(Request $request, $id)
     {
-        // Validasi input untuk jumlah
         $request->validate([
             'jumlah' => 'required|integer|min:1',
         ]);
 
-        // Temukan item keranjang berdasarkan ID dan update jumlahnya
         $keranjang = Keranjang::findOrFail($id);
         $keranjang->jumlah = $request->jumlah;
         $keranjang->save();
 
-        return redirect()->route('keranjang.index')->with('success', 'Jumlah produk berhasil diperbarui.');
+        return redirect()->route('admin.keranjang.index')->with('success', 'Jumlah produk berhasil diperbarui.');
     }
 }

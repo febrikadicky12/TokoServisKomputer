@@ -8,6 +8,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\NotaPembayaranController;
+use App\Http\Controllers\RiwayatController;
 
 // ====== DASHBOARD ======
 Route::get('/', function () {
@@ -15,7 +16,7 @@ Route::get('/', function () {
 })->name('admin.dashboard');
 
 // ====== ADMIN GROUP ======
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->name('admin.')->group(function () {
 
     // ====== SERVIS ======
     Route::get('/servis', [ServisController::class, 'index'])->name('servis.index');
@@ -47,19 +48,15 @@ Route::prefix('admin')->group(function () {
         Route::post('/', [PembayaranController::class, 'store'])->name('store');
     });
 
-    // ====== RIWAYAT ======
-    Route::get('/riwayat', function () {
-        return view('admin.riwayat.index');
-    })->name('riwayat.index');
-
-    Route::get('/riwayat/pemesanan', function () {
-        return view('admin.riwayat.pemesanan');
-    })->name('riwayat.pemesanan');
-
-    Route::get('/riwayat/transaksi', function () {
-        return view('admin.riwayat.transaksi');
-    })->name('riwayat.transaksi');
 });
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::prefix('riwayat')->name('riwayat.')->group(function () {
+        Route::get('/', [RiwayatController::class, 'index'])->name('index');
+        Route::get('/{id}', [RiwayatController::class, 'show'])->name('show');
+    });
+});
+
 
 // ====== NOTA PEMBAYARAN (PUBLIC) ======
 Route::post('/pembayaran', [NotaPembayaranController::class, 'store'])->name('pembayaran.store');

@@ -38,7 +38,7 @@
         <i class="bi bi-tools display-3 text-primary"></i>
         <h4 class="mt-3 fw-bold">Servis</h4>
         <p class="text-muted mb-4">Lihat semua data servis</p>
-        <a href="{{ route('servis.index') }}" class="btn btn-lg btn-primary rounded-pill px-4">Lihat Servis</a>
+        <a href="{{ route('admin.servis.index') }}" class="btn btn-lg btn-primary rounded-pill px-4">Lihat Servis</a>
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
         <i class="bi bi-box-seam display-3 text-warning"></i>
         <h4 class="mt-3 fw-bold">Produk</h4>
         <p class="text-muted mb-4">Kelola semua produk</p>
-        <a href="{{ route('produk.index') }}" class="btn btn-lg btn-warning text-white rounded-pill px-4">Kelola Produk</a>
+        <a href="{{ route('admin.produk.index') }}" class="btn btn-lg btn-warning text-white rounded-pill px-4">Kelola Produk</a>
       </div>
     </div>
   </div>
@@ -62,7 +62,7 @@
         <i class="bi bi-clock-history display-3 text-danger"></i>
         <h4 class="mt-3 fw-bold">Riwayat</h4>
         <p class="text-muted mb-4">Lihat semua riwayat transaksi</p>
-        <a href="{{ route('produk.index') }}" class="btn btn-lg btn-danger rounded-pill px-4">Riwayat</a>
+        <a href="{{ route('admin.riwayat.index') }}" class="btn btn-lg btn-danger rounded-pill px-4">Riwayat</a>
       </div>
     </div>
   </div>

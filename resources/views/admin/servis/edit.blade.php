@@ -6,7 +6,7 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-semibold">Edit Servis</h2>
-        <a href="{{ route('servis.index') }}" class="btn btn-secondary rounded-pill px-4"> Kembali</a>
+        <a href="{{ route('admin.servis.index') }}" class="btn btn-secondary rounded-pill px-4"> Kembali</a>
     </div>
 
     @if ($errors->any())
@@ -22,7 +22,7 @@
 
     <div class="card border-0 shadow rounded-4">
         <div class="card-body px-4 py-4">
-            <form action="{{ route('servis.update', $servis->id_notaservis) }}" method="POST">
+            <form action="{{ route('admin.servis.update', $servis->id_notaservis) }}" method="POST">
                 @csrf
                 @method('PUT')
 

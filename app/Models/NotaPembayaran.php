@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class NotaPembayaran extends Model
 {
     protected $table = 'nota_pembayaran';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'kode_notapembayaran';
     public $incrementing = true;
     protected $keyType = 'int';
 

@@ -11,7 +11,7 @@ class Keranjang extends Model
     protected $fillable = [
         'produk_kode',
         'jumlah',
-        'kode_pelanggan',
+        'kode_pelanggan', // Penting!
     ];
 
     public function produk()
