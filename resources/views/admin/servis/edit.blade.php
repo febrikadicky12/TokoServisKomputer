@@ -22,7 +22,7 @@
 
     <div class="card border-0 shadow rounded-4">
         <div class="card-body px-4 py-4">
-            <form action="{{ route('servis.update', $servis->id_notaservis) }}" method="POST">
+            <form action="{{ route('servis.update', $servis->kode_notaservis) }}" method="POST">
                 @csrf
                 @method('PUT')
 
