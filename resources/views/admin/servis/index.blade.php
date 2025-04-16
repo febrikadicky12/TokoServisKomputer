@@ -39,7 +39,7 @@
               @method('DELETE')
               <button class="btn btn-sm btn-danger">Hapus</button>
             </form>
-            <a href="{{ route('servis.cetak', $s->kode_notaservis) }}" target="_blank" class="btn btn-sm btn-info mt-1">Cetak PDF</a>
+            <a href="{{ route('servis.cetak', $s->kode_notaservis) }}" target="_blank" class="btn btn-sm btn-info">Cetak Nota</a>
           </td>
         </tr>
       @empty
