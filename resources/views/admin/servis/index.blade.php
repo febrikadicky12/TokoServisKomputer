@@ -33,12 +33,18 @@
           <td>{{ $s->no_telp ?? '-' }}</td> {{-- Baris baru --}}
           <td>{{ $s->deskripsi ?? '-' }}</td>
           <td>
+<<<<<<< HEAD
             <a href="{{ route('admin.servis.edit', $s->id_notaservis) }}" class="btn btn-sm btn-warning">Edit</a>
             <form action="{{ route('admin.servis.destroy', $s->id_notaservis) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+=======
+            <a href="{{ route('servis.edit', $s->kode_notaservis) }}" class="btn btn-sm btn-warning">Edit</a>
+            <form action="{{ route('servis.destroy', $s->kode_notaservis) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+>>>>>>> 788e9c400688d2dbf45faacfbd93203e180a4279
               @csrf
               @method('DELETE')
               <button class="btn btn-sm btn-danger">Hapus</button>
             </form>
+            <a href="{{ route('servis.cetak', $s->kode_notaservis) }}" target="_blank" class="btn btn-sm btn-info">Cetak Nota</a>
           </td>
         </tr>
       @empty

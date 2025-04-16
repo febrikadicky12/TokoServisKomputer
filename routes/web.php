@@ -22,12 +22,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/servis', [ServisController::class, 'index'])->name('servis.index');
     Route::get('/servis/create', [ServisController::class, 'create'])->name('servis.create');
     Route::post('/servis', [ServisController::class, 'store'])->name('servis.store');
+    Route::get('/servis/{kode_notaservis}/cetak', [ServisController::class, 'cetak'])->name('servis.cetak');
     Route::get('/servis/{id}', [ServisController::class, 'show'])->name('servis.show');
     Route::get('/servis/{id}/edit', [ServisController::class, 'edit'])->name('servis.edit');
     Route::put('/servis/{id}', [ServisController::class, 'update'])->name('servis.update');
     Route::delete('/servis/{id}', [ServisController::class, 'destroy'])->name('servis.destroy');
+   
+
 
     // ====== PRODUK ======
+    // ✅ perbaikan
     Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
     Route::get('/produk/create', [ProdukController::class, 'create'])->name('produk.create');
     Route::post('/produk', [ProdukController::class, 'store'])->name('produk.store');
@@ -48,6 +52,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/', [PembayaranController::class, 'store'])->name('store');
     });
 
+<<<<<<< HEAD
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -57,9 +62,28 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 });
 
+=======
+    // ====== RIWAYAT ======
+    Route::get('/riwayat', function () {
+        return view('admin.riwayat.index');
+    })->name('riwayat.index');
+
+    Route::get('/riwayat/pemesanan', function () {
+        return view('admin.riwayat.pemesanan');
+    })->name('riwayat.pemesanan');
+
+    Route::get('/riwayat/transaksi', function () {
+        return view('admin.riwayat.transaksi');
+    })->name('riwayat.transaksi');
+});
+>>>>>>> 788e9c400688d2dbf45faacfbd93203e180a4279
 
 // ====== NOTA PEMBAYARAN (PUBLIC) ======
 Route::post('/pembayaran', [NotaPembayaranController::class, 'store'])->name('pembayaran.store');
 Route::get('/nota-pembayaran-preview', [NotaPembayaranController::class, 'preview'])->name('nota.preview');
 Route::get('/nota-pembayaran/{kode_notapembayaran}', [NotaPembayaranController::class, 'show'])->name('nota.show');
 Route::get('/nota-pembayaran/cetak/{kode_notapembayaran}', [NotaPembayaranController::class, 'cetak'])->name('nota.cetak');
+<<<<<<< HEAD
+=======
+
+>>>>>>> 788e9c400688d2dbf45faacfbd93203e180a4279

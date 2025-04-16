@@ -22,7 +22,11 @@
 
     <div class="card border-0 shadow rounded-4">
         <div class="card-body px-4 py-4">
+<<<<<<< HEAD
             <form action="{{ route('admin.servis.update', $servis->id_notaservis) }}" method="POST">
+=======
+            <form action="{{ route('servis.update', $servis->kode_notaservis) }}" method="POST">
+>>>>>>> 788e9c400688d2dbf45faacfbd93203e180a4279
                 @csrf
                 @method('PUT')
 
