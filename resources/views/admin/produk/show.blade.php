@@ -61,6 +61,12 @@
             </span>
           </td>
         </tr>
+
+        <tr>
+          <th>Supplier</th>
+          <td>{{ $produk->supplier->nama ?? '-' }}</td>
+        </tr>
+
       </table>
       <a href="{{ route('produk.index') }}" class="btn btn-secondary mt-3">Kembali</a>
     </div>

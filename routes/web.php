@@ -48,21 +48,33 @@ Route::prefix('admin')->group(function () {
     Route::delete('admin/keranjang/{id}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
     Route::put('admin/keranjang/{id}/update', [KeranjangController::class, 'update'])->name('keranjang.update');
     Route::resource('admin/keranjang', KeranjangController::class)->except(['update']);
+    Route::post('/keranjang/{id}/konfirmasi', [KeranjangController::class, 'konfirmasi'])->name('keranjang.konfirmasi');
+    Route::post('/keranjang/{id}/batalkan', [KeranjangController::class, 'batalkan'])->name('keranjang.batalkan');
 
-    
-    Route::get('admin/pembayaran/create', [PembayaranController::class, 'create'])->name('pembayaran.create');
+    // Route untuk keranjang
+    Route::get('keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
+    Route::post('keranjang/tambah', [KeranjangController::class, 'tambah'])->name('keranjang.tambah');
+    Route::put('keranjang/{id}', [KeranjangController::class, 'update'])->name('keranjang.update');
+    Route::delete('keranjang/{id}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
+    Route::post('keranjang/kosongkan', [KeranjangController::class, 'kosongkan'])->name('keranjang.kosongkan');
 
+    // Route untuk pembayaran
+    Route::get('pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
+    Route::get('pembayaran/create', [PembayaranController::class, 'create'])->name('pembayaran.create');
+    Route::post('pembayaran', [PembayaranController::class, 'store'])->name('pembayaran.store');
+    Route::get('pembayaran/{id}', [PembayaranController::class, 'show'])->name('pembayaran.show');
+    Route::post('pembayaran/{id}/cancel', [PembayaranController::class, 'cancel'])->name('pembayaran.cancel');
 
-Route::get('/admin/riwayat', function () {
-    return view('admin.riwayat.index');
-})->name('riwayat.index');
+    Route::get('/admin/riwayat', function () {
+        return view('admin.riwayat.index');
+    })->name('riwayat.index');
 
-Route::get('/admin/riwayat/pemesanan', function () {
-    return view('admin.riwayat.pemesanan');
-})->name('riwayat.pemesanan');
+    Route::get('/admin/riwayat/pemesanan', function () {
+        return view('admin.riwayat.pemesanan');
+    })->name('riwayat.pemesanan');
 
-Route::get('/admin/riwayat/transaksi', function () {
-    return view('admin.riwayat.transaksi');
-})->name('riwayat.transaksi');
+    Route::get('/admin/riwayat/transaksi', function () {
+        return view('admin.riwayat.transaksi');
+    })->name('riwayat.transaksi');
 
-});
+    });

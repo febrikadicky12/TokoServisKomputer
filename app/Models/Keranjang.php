@@ -13,6 +13,7 @@ class Keranjang extends Model
         'jumlah',
     ];
 
+    // Relasi ke Produk via kode_produk
     public function produk()
     {
         return $this->belongsTo(Produk::class, 'produk_kode', 'kode_produk');

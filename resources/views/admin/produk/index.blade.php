@@ -29,6 +29,7 @@
           <h5 class="card-title text-truncate" style="max-width: 100%;">{{ $item->merek }} {{ $item->jenis }}</h5>
           <p class="card-text"><strong>Harga:</strong> Rp {{ number_format($item->harga, 0, ',', '.') }}</p>
           <p class="card-text"><strong>Stok:</strong> {{ $item->stok }}</p>
+          <p class="card-text"><strong>Supplier:</strong> {{ $item->supplier->nama ?? '-' }}</p>
           <span class="badge bg-{{ $item->status == 'Tersedia' ? 'success' : ($item->status == 'Habis' ? 'danger' : 'warning') }}">
             {{ $item->status }}
           </span>

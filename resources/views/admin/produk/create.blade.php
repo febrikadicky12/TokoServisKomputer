@@ -83,6 +83,17 @@
         </div>
       </div>
 
+      <div class="mb-3">
+        <label for="supplier_kode" class="form-label">Supplier</label>
+        <select name="supplier_kode" class="form-control" required>
+          <option value="" disabled selected>-- Pilih Supplier --</option>
+          @foreach($suppliers as $supplier)
+            <option value="{{ $supplier->kode }}">{{ $supplier->nama }}</option>
+          @endforeach
+        </select>
+      </div>
+
+
       <div class="text-end">
         <button type="submit" class="btn btn-primary">Simpan</button>
         <a href="{{ route('produk.index') }}" class="btn btn-secondary">Kembali</a>
