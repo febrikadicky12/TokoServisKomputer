@@ -88,6 +88,22 @@
         </div>
       </div>
 
+      <div class="form-group">
+        <label for="kode_supplier">Supplier</label>
+        <select name="kode_supplier" id="kode_supplier" class="form-control" required>
+          <option value="">-- Pilih Supplier --</option>
+          @foreach($suppliers as $supplier)
+            <option value="{{ $supplier->kode_supplier }}"
+              {{ old('kode_supplier', $produk->kode_supplier) == $supplier->kode_supplier ? 'selected' : '' }}>
+              {{ $supplier->nama }}
+            </option>
+          @endforeach
+        </select>
+      </div>
+
+
+
+
       <div class="text-end">
         <button type="submit" class="btn btn-primary">Update</button>
         <a href="{{ route('admin.produk.index') }}" class="btn btn-secondary">Kembali</a>

@@ -12,7 +12,11 @@
   <div class="alert alert-success">{{ session('success') }}</div>
 @endif
 
-@if($keranjang->count() > 0)
+@if(session('error'))
+  <div class="alert alert-danger">{{ session('error') }}</div>
+@endif
+
+@if($items->count() > 0)
   <div class="table-responsive">
     <table class="table table-bordered align-middle">
       <thead class="table-light">
@@ -29,10 +33,68 @@
       </thead>
       <tbody>
         @php $total = 0; @endphp
-        @foreach($keranjang as $i => $item)
+        @foreach($items as $i => $item)
           @php
             $produk = $item->produk;
           @endphp
+<<<<<<< HEAD
+          <tr>
+            <td>{{ $i + 1 }}</td>
+
+            <td>
+              @if($produk && $produk->gambar)
+                <img src="{{ asset($produk->gambar) }}" alt="Gambar Produk" width="60" height="60" style="object-fit: cover;">
+              @else
+                <span class="text-muted">Tidak Ada Gambar</span>
+              @endif
+            </td>
+
+            <td>
+              @if($produk)
+                {{ $produk->merek }} {{ $produk->jenis }}
+              @else
+                <span class="text-danger">Produk tidak tersedia</span>
+              @endif
+            </td>
+
+            <td>{{ $produk->kode_produk ?? '-' }}</td>
+            <td>
+              @if($produk)
+                Rp {{ number_format($produk->harga, 0, ',', '.') }}
+              @else
+                -
+              @endif
+            </td>
+
+            <td>
+              @if($produk)
+              <form action="{{ route('keranjang.update', $item->id) }}" method="POST" style="display: inline-block;">
+                @csrf
+                @method('PUT')
+                <input type="number" name="jumlah" value="{{ $item->jumlah }}" min="1" class="form-control form-control-sm" style="width: 60px;">
+                <button type="submit" class="btn btn-sm btn-warning mt-2">Update</button>
+              </form>
+              @else
+                {{ $item->jumlah }}
+              @endif
+            </td>
+
+            @php
+              $subtotal = $produk ? $produk->harga * $item->jumlah : 0;
+              $total += $subtotal;
+            @endphp
+
+            <td>Rp {{ number_format($subtotal, 0, ',', '.') }}</td>
+
+            <td>
+              <form action="{{ route('keranjang.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Hapus item ini dari keranjang?')">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-sm btn-danger">Hapus</button>
+              </form>
+            </td>
+          </tr>
+=======
 
           @if($produk)
             @php
@@ -69,8 +131,10 @@
               <td colspan="8" class="text-danger">Produk tidak ditemukan (mungkin sudah dihapus dari database).</td>
             </tr>
           @endif
+>>>>>>> origin/main
         @endforeach
       </tbody>
+
       <tfoot>
         <tr>
           <td colspan="6" class="text-end"><strong>Total</strong></td>
@@ -80,13 +144,20 @@
     </table>
   </div>
 
+<<<<<<< HEAD
+  <div class="d-flex justify-content-between mt-4">
+    <a href="{{ route('produk.index') }}" class="btn btn-secondary">Kembali</a>
+    <a href="{{ route('pembayaran.create') }}" class="btn btn-success">Lanjut ke Pembayaran</a>
+=======
   <div class="text-start">
     <a href="{{ route('admin.produk.index') }}" class="btn btn-secondary">Kembali</a>
   </div>
 
   <div class="mt-3 text-end">
     <a href="{{ route('admin.pembayaran.create') }}" class="btn btn-success">Lanjut ke Pembayaran</a>
+>>>>>>> origin/main
   </div>
+
 @else
   <div class="text-center">
     <p>Keranjang masih kosong. Silakan tambahkan produk.</p>

@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+anjay
+=======
 @extends('admin.layouts.master')
 
 @section('title', 'Halaman Pembayaran')
@@ -76,3 +79,4 @@
   </div>
 @endif
 @endsection
+>>>>>>> origin/main

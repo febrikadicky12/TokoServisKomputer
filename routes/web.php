@@ -22,8 +22,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/servis', [ServisController::class, 'index'])->name('servis.index');
     Route::get('/servis/create', [ServisController::class, 'create'])->name('servis.create');
     Route::post('/servis', [ServisController::class, 'store'])->name('servis.store');
+<<<<<<< HEAD
+    Route::get('/servis/{id}', [ServisController::class, 'show'])->name('servis.show'); // ⬅ createan
+=======
     Route::get('/servis/{kode_notaservis}/cetak', [ServisController::class, 'cetak'])->name('servis.cetak');
     Route::get('/servis/{id}', [ServisController::class, 'show'])->name('servis.show');
+>>>>>>> origin/main
     Route::get('/servis/{id}/edit', [ServisController::class, 'edit'])->name('servis.edit');
     Route::put('/servis/{id}', [ServisController::class, 'update'])->name('servis.update');
     Route::delete('/servis/{id}', [ServisController::class, 'destroy'])->name('servis.destroy');
@@ -40,6 +44,30 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::put('/produk/{id}', [ProdukController::class, 'update'])->name('produk.update');
     Route::delete('/produk/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
 
+<<<<<<< HEAD
+    // ====== Keranjang ======
+    Route::get('admin/keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
+    Route::post('admin/keranjang/create', [KeranjangController::class, 'create'])->name('keranjang.create');
+    Route::delete('admin/keranjang/{id}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
+    Route::put('admin/keranjang/{id}/update', [KeranjangController::class, 'update'])->name('keranjang.update');
+    Route::resource('admin/keranjang', KeranjangController::class)->except(['update']);
+    Route::post('/keranjang/{id}/konfirmasi', [KeranjangController::class, 'konfirmasi'])->name('keranjang.konfirmasi');
+    Route::post('/keranjang/{id}/batalkan', [KeranjangController::class, 'batalkan'])->name('keranjang.batalkan');
+
+    // Route untuk keranjang
+    Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
+    Route::post('/keranjang', [KeranjangController::class, 'store'])->name('keranjang.store');    
+    Route::put('keranjang/{id}', [KeranjangController::class, 'update'])->name('keranjang.update');
+    Route::delete('keranjang/{id}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
+    Route::post('keranjang/kosongkan', [KeranjangController::class, 'kosongkan'])->name('keranjang.kosongkan');
+    
+    // Route untuk pembayaran
+    Route::get('pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
+    Route::get('pembayaran/create', [PembayaranController::class, 'create'])->name('pembayaran.create');
+    Route::post('pembayaran', [PembayaranController::class, 'store'])->name('pembayaran.store');
+    Route::get('pembayaran/{id}', [PembayaranController::class, 'show'])->name('pembayaran.show');
+    Route::post('pembayaran/{id}/cancel', [PembayaranController::class, 'cancel'])->name('pembayaran.cancel');
+=======
     // ====== KERANJANG ======
     Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
     Route::post('/keranjang/tambah', [KeranjangController::class, 'tambah'])->name('keranjang.tambah');
@@ -60,10 +88,26 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{id}', [RiwayatController::class, 'show'])->name('show');
     });
 });
+>>>>>>> origin/main
 
+    Route::get('/admin/riwayat', function () {
+        return view('admin.riwayat.index');
+    })->name('riwayat.index');
 
+<<<<<<< HEAD
+    Route::get('/admin/riwayat/pemesanan', function () {
+        return view('admin.riwayat.pemesanan');
+    })->name('riwayat.pemesanan');
+
+    Route::get('/admin/riwayat/transaksi', function () {
+        return view('admin.riwayat.transaksi');
+    })->name('riwayat.transaksi');
+
+    });
+=======
 // ====== NOTA PEMBAYARAN (PUBLIC) ======
 Route::post('/pembayaran', [NotaPembayaranController::class, 'store'])->name('pembayaran.store');
 Route::get('/nota-pembayaran-preview', [NotaPembayaranController::class, 'preview'])->name('nota.preview');
 Route::get('/nota-pembayaran/{kode_notapembayaran}', [NotaPembayaranController::class, 'show'])->name('nota.show');
 Route::get('/nota-pembayaran/cetak/{kode_notapembayaran}', [NotaPembayaranController::class, 'cetak'])->name('nota.cetak');
+>>>>>>> origin/main
