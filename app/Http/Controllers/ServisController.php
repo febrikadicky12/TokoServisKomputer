@@ -67,7 +67,7 @@ class ServisController extends Controller
             'deskripsi' => $request->deskripsi,
         ]);
 
-        return redirect()->route('servis.index')->with('success', 'Data servis berhasil ditambahkan');
+        return redirect()->route('admin.servis.index')->with('success', 'Data servis berhasil ditambahkan');
     }
 
     public function edit($id)
