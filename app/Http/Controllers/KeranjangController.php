@@ -72,4 +72,5 @@ class KeranjangController extends Controller
 
         return redirect()->route('admin.keranjang.index')->with('success', 'Jumlah produk berhasil diperbarui.');
     }
+    
 }
