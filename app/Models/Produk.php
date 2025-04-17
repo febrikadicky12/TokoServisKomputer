@@ -21,8 +21,6 @@ class Produk extends Model
         return $this->belongsTo(Supplier::class, 'kode_supplier', 'kode_supplier');
     }
 
-
-
     /**
      * Update status produk berdasarkan stok secara otomatis
      */
@@ -36,7 +34,7 @@ class Produk extends Model
     public function kurangiStok($jumlah)
     {
         $this->stok -= $jumlah;
-        $this->stok = max(0, $this->stok); // biar gak minus
+        $this->stok = max(0, $this->stok); 
         $this->updateStatus();
         $this->save();
     }
