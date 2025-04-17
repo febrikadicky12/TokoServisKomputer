@@ -8,11 +8,7 @@
     <h4>Tambah Produk</h4>
   </div>
   <div class="card-body">
-<<<<<<< HEAD
     <form action="{{ route('admin.produk.store') }}" method="POST" enctype="multipart/form-data">
-=======
-    <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data">
->>>>>>> 788e9c400688d2dbf45faacfbd93203e180a4279
       @csrf
 
       <div class="mb-3">
@@ -83,11 +79,7 @@
       </div>
 
       <button type="submit" class="btn btn-success">Simpan</button>
-<<<<<<< HEAD
       <a href="{{ route('admin.produk.index') }}" class="btn btn-secondary">Kembali</a>
-=======
-      <a href="{{ route('produk.index') }}" class="btn btn-secondary">Kembali</a>
->>>>>>> 788e9c400688d2dbf45faacfbd93203e180a4279
     </form>
   </div>
 </div>

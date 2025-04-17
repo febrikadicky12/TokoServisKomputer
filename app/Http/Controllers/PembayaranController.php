@@ -17,7 +17,8 @@ class PembayaranController extends Controller
     {
         // Ambil kode_pelanggan dari user yang sedang login atau sesuai parameter
         // Misalnya $kodePelanggan datang dari sesi atau request
-        $kodePelanggan = 'KODE001';  // Contoh, pastikan ini sesuai dengan logika aplikasi Anda
+        $kodePelanggan = $request->kode_pelanggan ?? session('kode_pelanggan');
+        // Contoh, pastikan ini sesuai dengan logika aplikasi Anda
         
         // Ambil data keranjang untuk kode_pelanggan
         $keranjang = Keranjang::with('produk')->where('kode_pelanggan', $kodePelanggan)->get();
