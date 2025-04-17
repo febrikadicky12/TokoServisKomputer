@@ -26,7 +26,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/servis', [ServisController::class, 'index'])->name('servis.index');
     Route::get('/servis/create', [ServisController::class, 'create'])->name('servis.create');
     Route::post('/servis', [ServisController::class, 'store'])->name('servis.store');
-    Route::get('/servis/{id}', [ServisController::class, 'show'])->name('servis.show'); // ⬅ Tambahan
+    Route::get('/servis/{id}', [ServisController::class, 'show'])->name('servis.show'); // ⬅ createan
     Route::get('/servis/{id}/edit', [ServisController::class, 'edit'])->name('servis.edit');
     Route::put('/servis/{id}', [ServisController::class, 'update'])->name('servis.update');
     Route::delete('/servis/{id}', [ServisController::class, 'destroy'])->name('servis.destroy');
@@ -44,7 +44,7 @@ Route::prefix('admin')->group(function () {
 
     // ====== Keranjang ======
     Route::get('admin/keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
-    Route::post('admin/keranjang/tambah', [KeranjangController::class, 'tambah'])->name('keranjang.tambah');
+    Route::post('admin/keranjang/create', [KeranjangController::class, 'create'])->name('keranjang.create');
     Route::delete('admin/keranjang/{id}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
     Route::put('admin/keranjang/{id}/update', [KeranjangController::class, 'update'])->name('keranjang.update');
     Route::resource('admin/keranjang', KeranjangController::class)->except(['update']);
@@ -52,12 +52,12 @@ Route::prefix('admin')->group(function () {
     Route::post('/keranjang/{id}/batalkan', [KeranjangController::class, 'batalkan'])->name('keranjang.batalkan');
 
     // Route untuk keranjang
-    Route::get('keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
-    Route::post('keranjang/tambah', [KeranjangController::class, 'tambah'])->name('keranjang.tambah');
+    Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
+    Route::post('/keranjang', [KeranjangController::class, 'store'])->name('keranjang.store');    
     Route::put('keranjang/{id}', [KeranjangController::class, 'update'])->name('keranjang.update');
     Route::delete('keranjang/{id}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
     Route::post('keranjang/kosongkan', [KeranjangController::class, 'kosongkan'])->name('keranjang.kosongkan');
-
+    
     // Route untuk pembayaran
     Route::get('pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
     Route::get('pembayaran/create', [PembayaranController::class, 'create'])->name('pembayaran.create');

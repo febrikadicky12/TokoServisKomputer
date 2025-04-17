@@ -11,9 +11,10 @@ class ProdukController extends Controller
 {
     public function index()
     {
-        $produk = Produk::all();
+        $produk = Produk::with('supplier')->get(); 
         return view('admin.produk.index', compact('produk'));
     }
+    
 
     public function create()
     {
@@ -35,8 +36,8 @@ class ProdukController extends Controller
             'kondisi' => 'required',
             'status' => 'nullable', // bisa dikosongkan, nanti di-handle otomatis
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'supplier_id' => 'nullable|exists:suppliers,id',
-        ]);
+            'kode_supplier' => 'nullable|exists:suppliers,kode_supplier',
+            ]);
 
         if ($request->hasFile('gambar')) {
             $gambar = $request->file('gambar');
@@ -75,8 +76,8 @@ class ProdukController extends Controller
             'kondisi' => 'required',
             'status' => 'nullable',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'supplier_id' => 'nullable|exists:suppliers,id',
-        ]);
+            'kode_supplier' => 'nullable|exists:suppliers,kode_supplier', 
+            ]);
 
         if ($request->hasFile('gambar')) {
             if ($produk->gambar && Storage::exists(str_replace('storage/', 'public/', $produk->gambar))) {
@@ -98,9 +99,9 @@ class ProdukController extends Controller
 
     public function show($id)
     {
-        $produk = Produk::findOrFail($id);
+        $produk = Produk::with('supplier')->findOrFail($id);
         return view('admin.produk.show', compact('produk'));
-    }
+    }    
 
     public function destroy($id)
     {

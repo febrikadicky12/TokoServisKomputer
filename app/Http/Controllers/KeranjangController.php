@@ -1,86 +1,76 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Keranjang;
 use App\Models\Produk;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class KeranjangController extends Controller
 {
     public function index()
     {
-        $keranjang = Keranjang::with('produk')->get();
-        return view('admin.keranjang.index', compact('keranjang'));
+        $items = Keranjang::with('produk')->get();
+        return view('admin.keranjang.index', compact('items'));
     }
 
-    public function tambah(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'produk_kode' => 'required|exists:produk,kode_produk',
-            'jumlah' => 'required|numeric|min:1'
+            'jumlah' => 'required|numeric|min:1',
         ]);
 
         $produk = Produk::where('kode_produk', $request->produk_kode)->first();
-        
-        // Cek stok tersedia
-        if ($produk->stok < $request->jumlah) {
-            return redirect()->back()->with('error', 'Stok tidak mencukupi! Stok tersedia: ' . $produk->stok);
+
+        // Cek apakah produk bisa ditambahkan ke keranjang
+        if (!$produk) {
+            return redirect()->back()->with('error', 'Produk tidak ditemukan.');
         }
 
-        // Cek jika produk sudah ada di keranjang
-        $keranjang = Keranjang::where('produk_kode', $request->produk_kode)->first();
-        
-        if ($keranjang) {
-            // Update jumlah jika produk sudah ada
-            if ($produk->stok < ($keranjang->jumlah + $request->jumlah)) {
-                return redirect()->back()->with('error', 'Stok tidak mencukupi! Stok tersedia: ' . $produk->stok);
+        // Jika stok cukup atau status produk = 'Pesan', maka lanjut
+        if ($produk->stok >= $request->jumlah || $produk->status === 'Pesan') {
+            $item = Keranjang::where('produk_kode', $request->produk_kode)->first();
+
+            if ($item) {
+                $item->jumlah += $request->jumlah;
+                $item->save();
+            } else {
+                Keranjang::create([
+                    'produk_kode' => $request->produk_kode,
+                    'jumlah' => $request->jumlah,
+                ]);
             }
-            
-            $keranjang->jumlah += $request->jumlah;
-            $keranjang->save();
-        } else {
-            // Tambah produk baru ke keranjang
-            Keranjang::create([
-                'produk_kode' => $request->produk_kode,
-                'jumlah' => $request->jumlah
-            ]);
+
+            return redirect()->route('keranjang.index')->with('success', 'Produk ditambahkan ke keranjang.');
         }
 
-        return redirect()->route('keranjang.index')->with('success', 'Produk berhasil ditambahkan ke keranjang.');
+        return redirect()->back()->with('error', 'Stok produk tidak mencukupi dan tidak dapat dipesan.');
     }
 
-    public function update(Request $request, $id)
+        public function update(Request $request, $id)
     {
+        $item = Keranjang::findOrFail($id); // Temukan item berdasarkan ID
+
+        // Validasi input
         $request->validate([
-            'jumlah' => 'required|numeric|min:1'
+            'jumlah' => 'required|numeric|min:1', // Pastikan jumlahnya valid
         ]);
 
-        $keranjang = Keranjang::findOrFail($id);
-        $produk = $keranjang->produk;
+        // Update jumlah item di keranjang
+        $item->jumlah = $request->jumlah;
+        $item->save();
 
-        // Cek stok tersedia
-        if ($produk->stok < $request->jumlah) {
-            return redirect()->back()->with('error', 'Stok tidak mencukupi! Stok tersedia: ' . $produk->stok);
-        }
-
-        $keranjang->jumlah = $request->jumlah;
-        $keranjang->save();
-
-        return redirect()->route('keranjang.index')->with('success', 'Keranjang berhasil diperbarui.');
+        // Kembali ke halaman keranjang dengan pesan sukses
+        return redirect()->route('keranjang.index')->with('success', 'Jumlah produk berhasil diperbarui.');
     }
+
 
     public function destroy($id)
     {
-        $keranjang = Keranjang::findOrFail($id);
-        $keranjang->delete();
+        $item = Keranjang::findOrFail($id);
+        $item->delete();
 
-        return redirect()->route('keranjang.index')->with('success', 'Item berhasil dihapus dari keranjang.');
-    }
-
-    public function kosongkan()
-    {
-        Keranjang::truncate();
-        return redirect()->route('keranjang.index')->with('success', 'Keranjang berhasil dikosongkan.');
+        return redirect()->route('keranjang.index')->with('success', 'Item keranjang dihapus.');
     }
 }

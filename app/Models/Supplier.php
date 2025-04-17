@@ -12,7 +12,7 @@ class Supplier extends Model
     public $incrementing = false; // karena pakai string bukan auto increment
 
     protected $fillable = [
-        'kode_supplier', 'nama_supplier', 'alamat', 'telepon'
+        'kode_supplier', 'nama_supplier', 'alamat', 'nama_pengirim', 'no_telp'
     ];
 
     /**

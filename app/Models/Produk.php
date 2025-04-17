@@ -21,6 +21,8 @@ class Produk extends Model
         return $this->belongsTo(Supplier::class, 'kode_supplier', 'kode_supplier');
     }
 
+
+
     /**
      * Update status produk berdasarkan stok secara otomatis
      */

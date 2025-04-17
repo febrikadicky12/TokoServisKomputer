@@ -83,15 +83,20 @@
         </div>
       </div>
 
-      <div class="mb-3">
-        <label for="supplier_kode" class="form-label">Supplier</label>
-        <select name="supplier_kode" class="form-control" required>
-          <option value="" disabled selected>-- Pilih Supplier --</option>
-          @foreach($suppliers as $supplier)
-            <option value="{{ $supplier->kode }}">{{ $supplier->nama }}</option>
-          @endforeach
-        </select>
-      </div>
+      <div class="form-group">
+  <label for="kode_supplier">Supplier</label>
+  <select name="kode_supplier" id="kode_supplier" class="form-control" required>
+    <option value="">-- Pilih Supplier --</option>
+    @foreach($suppliers as $supplier)
+      <option value="{{ $supplier->kode_supplier }}"
+        {{ old('kode_supplier', $produk->kode_supplier) == $supplier->kode_supplier ? 'selected' : '' }}>
+        {{ $supplier->nama }}
+      </option>
+    @endforeach
+  </select>
+</div>
+
+
 
 
       <div class="text-end">

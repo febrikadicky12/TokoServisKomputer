@@ -36,7 +36,7 @@
         </div>
 
         <div class="card-footer d-flex justify-content-between align-items-center">
-          <form action="{{ route('keranjang.tambah') }}" method="POST" class="d-inline-block">
+          <form action="{{ route('keranjang.store') }}" method="POST" class="d-inline-block">
             @csrf
             <input type="hidden" name="produk_kode" value="{{ $item->kode_produk }}">
             <input type="hidden" name="jumlah" value="1">
