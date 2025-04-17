@@ -5,7 +5,7 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
   <h4>Data Produk</h4>
-  <a href="{{ route('produk.create') }}" class="btn btn-primary">+ Tambah Produk</a>
+  <a href="{{ route('admin.produk.create') }}" class="btn btn-primary">+ Tambah Produk</a>
 </div>
 
 @if(session('success'))
@@ -36,7 +36,11 @@
         </div>
 
         <div class="card-footer d-flex justify-content-between align-items-center">
+<<<<<<< HEAD
           <form action="{{ route('keranjang.store') }}" method="POST" class="d-inline-block">
+=======
+          <form action="{{ route('admin.keranjang.tambah') }}" method="POST" class="d-inline-block">
+>>>>>>> origin/main
             @csrf
             <input type="hidden" name="produk_kode" value="{{ $item->kode_produk }}">
             <input type="hidden" name="jumlah" value="1">
@@ -44,9 +48,9 @@
           </form>
 
           <div class="d-flex gap-1">
-            <a href="{{ route('produk.show', $item->id) }}" class="btn btn-sm btn-info">Lihat</a>
-            <a href="{{ route('produk.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
-            <form action="{{ route('produk.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin hapus?')">
+            <a href="{{ route('admin.produk.show', $item->id) }}" class="btn btn-sm btn-info">Lihat</a>
+            <a href="{{ route('admin.produk.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
+            <form action="{{ route('admin.produk.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin hapus?')">
               @csrf
               @method('DELETE')
               <button class="btn btn-sm btn-danger">Hapus</button>

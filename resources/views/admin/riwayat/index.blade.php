@@ -1,5 +1,34 @@
 @extends('admin.layouts.master')
 
+<<<<<<< HEAD
+@section('title', 'Riwayat')
+
+@section('content')
+<h2>Riwayat Transaksi</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Kode Pesanan</th>
+            <th>Tanggal</th>
+            <th>Total Bayar</th>
+            <th>Status</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($riwayat as $nota)
+        <tr>
+            <td>{{ $nota->kode_pesanan }}</td>
+            <td>{{ \Carbon\Carbon::parse($nota->tanggal_pembayaran)->format('d M Y') }}</td>
+            <td>Rp{{ number_format($nota->total_bayar, 0, ',', '.') }}</td>
+            <td>{{ ucfirst($nota->status_pembayaran) }}</td>
+            <td><a href="{{ route('admin.riwayat.show', $nota->id) }}" class="btn btn-info btn-sm">Detail</a></td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+=======
 @section('title', 'Riwayat Pemesanan & Transaksi')
 
 @section('content')
@@ -32,14 +61,14 @@
           <tr>
             <td>ORD-00123</td>
             <td>12 Apr 2025</td>
-            <td>3 Item<br>Lipstik<br>Bedak</td>
+            <td>3 Item<br>Laptop</td>
             <td><span class="badge bg-primary">Dikirim</span></td>
             <td><a href="#">Detail</a></td>
           </tr>
           <tr>
             <td>ORD-00124</td>
             <td>11 Apr 2025</td>
-            <td>1 Item<br>Serum</td>
+            <td>1 Item<br>Komputer</td>
             <td><span class="badge bg-danger">Dibatalkan</span></td>
             <td><a href="#">Detail</a></td>
           </tr>
@@ -72,4 +101,5 @@
     </div>
   </div>
 </div>
+>>>>>>> 788e9c400688d2dbf45faacfbd93203e180a4279
 @endsection

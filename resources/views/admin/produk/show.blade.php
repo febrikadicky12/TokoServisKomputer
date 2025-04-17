@@ -68,7 +68,7 @@
         </tr>
 
       </table>
-      <a href="{{ route('produk.index') }}" class="btn btn-secondary mt-3">Kembali</a>
+      <a href="{{ route('admin.produk.index') }}" class="btn btn-secondary mt-3">Kembali</a>
     </div>
   </div>
 </div>

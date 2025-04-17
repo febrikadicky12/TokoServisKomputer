@@ -5,7 +5,7 @@
 @section('content')
 <div class="d-flex justify-content-between mb-3">
   <h4>Data Servis</h4>
-  <a href="{{ route('servis.create') }}" class="btn btn-primary">+ Tambah Servis</a>
+  <a href="{{ route('admin.servis.create') }}" class="btn btn-primary">+ Tambah Servis</a>
 </div>
 
 @if(session('success'))
@@ -33,12 +33,13 @@
           <td>{{ $s->no_telp ?? '-' }}</td> {{-- Baris baru --}}
           <td>{{ $s->deskripsi ?? '-' }}</td>
           <td>
-            <a href="{{ route('servis.edit', $s->id_notaservis) }}" class="btn btn-sm btn-warning">Edit</a>
-            <form action="{{ route('servis.destroy', $s->id_notaservis) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
+            <a href="{{ route('admin.servis.edit', $s->kode_notaservis) }}" class="btn btn-sm btn-warning">Edit</a>
+            <form action="{{ route('admin.servis.destroy', $s->kode_notaservis) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus?')">
               @csrf
               @method('DELETE')
               <button class="btn btn-sm btn-danger">Hapus</button>
             </form>
+            <a href="{{ route('admin.servis.cetak', $s->kode_notaservis) }}" target="_blank" class="btn btn-sm btn-info">Cetak Nota</a>
           </td>
         </tr>
       @empty

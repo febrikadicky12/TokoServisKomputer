@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ServisController extends Controller
 {
@@ -66,14 +67,14 @@ class ServisController extends Controller
             'deskripsi' => $request->deskripsi,
         ]);
 
-        return redirect()->route('servis.index')->with('success', 'Data servis berhasil ditambahkan');
+        return redirect()->route('admin.servis.index')->with('success', 'Data servis berhasil ditambahkan');
     }
 
     public function edit($id)
     {
         $servis = DB::table('nota_servis')
             ->join('pelanggan', 'nota_servis.kode_pelanggan', '=', 'pelanggan.kode_pelanggan')
-            ->where('id_notaservis', $id)
+            ->where('kode_notaservis', $id)
             ->select(
                 'nota_servis.*',
                 'pelanggan.nama as nama_pelanggan',
@@ -116,7 +117,7 @@ class ServisController extends Controller
             $kodePelanggan = $pelanggan->kode_pelanggan;
         }
 
-        DB::table('nota_servis')->where('id_notaservis', $id)->update([
+        DB::table('nota_servis')->where('kode_notaservis', $id)->update([
             'tanggal' => $request->tanggal,
             'kode_pelanggan' => $kodePelanggan,
             'deskripsi' => $request->deskripsi,
@@ -127,15 +128,15 @@ class ServisController extends Controller
 
     public function destroy($id)
     {
-        DB::table('nota_servis')->where('id_notaservis', $id)->delete();
+        DB::table('nota_servis')->where('kode_notaservis', $id)->delete();
         return redirect()->route('servis.index')->with('success', 'Data servis berhasil dihapus');
     }
 
     public function show($id)
     {
         $servis = DB::table('nota_servis')
-            ->join('pelanggan', 'nota_servis.kode_pelanggan', '=', 'pelanggan.kode_pelanggan')
-            ->where('id_notaservis', $id)
+            ->join('pelanggan', 'nota_servis.kode_pelanggan', '=', 'pelanggan.id')
+            ->where('kode_notaservis', $id)
             ->select(
                 'nota_servis.*',
                 'pelanggan.nama as nama_pelanggan',
@@ -149,4 +150,20 @@ class ServisController extends Controller
 
         return view('admin.servis.show', compact('servis'));
     }
+    public function cetak($kode_notaservis)
+{
+    // Ambil data servis
+    $servis = DB::table('nota_servis')
+        ->join('pelanggan', 'nota_servis.kode_pelanggan', '=', 'pelanggan.kode_pelanggan')
+        ->where('nota_servis.kode_notaservis', $kode_notaservis)
+        ->select('nota_servis.*', 'pelanggan.nama as nama_pelanggan', 'pelanggan.no_telp')
+        ->first();
+
+    // Load view dan generate PDF
+    $pdf = PDF::loadView('admin.servis.nota', compact('servis'));
+
+    // Return PDF sebagai download
+    return $pdf->stream('nota_servis_'.$kode_notaservis.'.pdf');
+}
+
 }

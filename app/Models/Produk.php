@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Produk extends Model
 {
     protected $table = 'produk';
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = [
         'kode_produk', 'kategori', 'merek', 'jenis', 'spesifikasi',
